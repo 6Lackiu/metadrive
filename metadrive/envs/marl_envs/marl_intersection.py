@@ -11,10 +11,10 @@ from metadrive.utils import Config
 
 MAIntersectionConfig = dict(
     spawn_roads=[
-        Road(FirstPGBlock.NODE_2, FirstPGBlock.NODE_3),
-        -Road(InterSection.node(1, 0, 0), InterSection.node(1, 0, 1)),
-        -Road(InterSection.node(1, 1, 0), InterSection.node(1, 1, 1)),
-        -Road(InterSection.node(1, 2, 0), InterSection.node(1, 2, 1)),
+        Road(FirstPGBlock.NODE_2, FirstPGBlock.NODE_3),                     # 左方
+        -Road(InterSection.node(1, 0, 0), InterSection.node(1, 0, 1)),      # 下方
+        -Road(InterSection.node(1, 1, 0), InterSection.node(1, 1, 1)),      # 右方
+        -Road(InterSection.node(1, 2, 0), InterSection.node(1, 2, 1)),      # 上方
     ],
     num_agents=30,
     map_config=dict(exit_length=60, lane_num=2),
@@ -75,7 +75,7 @@ class MAIntersectionSpawnManager(SpawnManager):
 
     def update_destination_for(self, agent_id, vehicle_config):
         end_roads = copy.deepcopy(self.engine.global_config["spawn_roads"])
-        if self.disable_u_turn:  # Remove the spawn road from end roads
+        if self.disable_u_turn:  # Remove the spawn road from end roads  终止道路不作为出生道路
             end_roads = [r for r in end_roads if Road(*vehicle_config["spawn_lane_index"][:2]) != r]
         end_road = -self.np_random.choice(end_roads)  # Use negative road!
         vehicle_config["destination"] = end_road.end_node

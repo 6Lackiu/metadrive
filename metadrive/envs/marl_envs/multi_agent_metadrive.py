@@ -46,7 +46,7 @@ MULTI_AGENT_METADRIVE_DEFAULT_CONFIG = dict(
         # results published in papers. See
         # https://github.com/metadriverse/metadrive/issues/161#issuecomment-1080114029
         # for more information
-        vehicle_model="static_default",
+        vehicle_model="static_default",     # xl货车 x吉普 m轿车(但不同于default) s甲壳虫
     ),
     target_vehicle_configs=dict(),
 
